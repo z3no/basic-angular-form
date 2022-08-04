@@ -1,1 +1,45 @@
-<p>component-form works!</p>
+<!--<p>component-form works!</p>-->
+<div class="container">
+
+  <form>
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" name="first name" id="firstName" class="form-control" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="last name" id="lastName" class="form-control" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="text" name="email" id="email" class="form-control" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone number:</label>
+      <input type="text" name="phone number" id="phoneNumber" class="form-control" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="favLanguage">Favourite language:</label>
+      <select name="coding language" id="favLanguage" class="form-control" ngModel>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="js">JavaScript</option>
+        <option value="php">PHP</option>
+        <option value="sql">SQL</option>
+        <option value="ts">TypeScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="c#">C#</option>
+        <option value="ruby">Ruby</option>
+      </select>
+    </div>
+
+    <button class="btn btn-form" type="submit">Submit</button>
+
+  </form>
+
+</div>
