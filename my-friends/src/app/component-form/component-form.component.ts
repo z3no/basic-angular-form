@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Friend } from "../friend";
 
 @Component({
   selector: 'app-component-form',
@@ -20,6 +21,8 @@ export class ComponentFormComponent implements OnInit {
     'C#',
     'Ruby'
   ];
+
+  friendModel = new Friend('', '', '', '', '');
 
   constructor() { }
 

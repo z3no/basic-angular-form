@@ -1,32 +1,32 @@
 <!--<p>component-form works!</p>-->
-{{ formName.value | json }}
+{{ friendModel | json }}
 
 <div class="container">
 
-  <form #formName="ngForm">
+  <form #formFriends="ngForm">
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" ngModel>
+      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName">
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" ngModel>
+      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" [(ngModel)]="friendModel.lastName">
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" name="email" id="email" class="form-control" #email="ngModel" ngModel>
+      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email">
     </div>
 
     <div class="form-group">
       <label for="phoneNumber">Phone number:</label>
-      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" ngModel>
+      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" [(ngModel)]="friendModel.phoneNumber">
     </div>
 
     <div class="form-group">
       <label for="favLanguage">Favourite language:</label>
-      <select name="favourite language" id="favLanguage" class="form-control" #languages="ngModel" ngModel>
+      <select name="favourite language" id="favLanguage" class="form-control" #favLanguages="ngModel" [(ngModel)]="friendModel.favLanguages">
         <option *ngFor="let language of Languages">{{language}}</option>
       </select>
     </div>
