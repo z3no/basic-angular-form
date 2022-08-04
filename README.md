@@ -78,9 +78,42 @@ Angular is a platform that can scale from single-developer projects to enterpris
 
 ### Components:
 Components are our building blocks that compose an application. It includes a TypeScript class with an `@Component()` decorator, an HTML template, and styles.
+
+![Components visual](https://www.simplilearn.com/ice9/free_resources_article_thumb/Components_Heirarchy-Angular_Components.PNG)
+
 The `@Component()` decorator specifies Angular-specific info:
 - A CSS selector (defines how the component is used in a template). HTML elements in your template that match this selector become instances of the component.
 - An HTML template that instructs Angular how to render the component.
 - An optional set of CSS styles that define the appearance of the template's HTML elements.
 
 ### Templates
+Every component has an HTML template that declares how that component renders. You define this template either inline or by file path.
+
+Angular extends HTML with additional syntax that lets you insert dynamic values from your component.
+Angular automatically updates the rendered DOM when your component's state changes. One application of this feature is inserting dynamic text.
+
+In my `app.component.html` I have:
+```html
+  <h2>{{title}}</h2>
+```
+Notice the use of **"double"** curly braces - they instruct Angular to interpolate the contents within them.
+
+The value from title comes from the component class:
+```typescript
+  import { Component } from '@angular/core';
+
+    @Component({
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+        styleUrls: ['./app.component.scss']
+    })
+    
+    export class AppComponent {
+        title = 'myFriendspace';
+    }
+```
+
+When the app loads the component and its template, the user sees the following:
+```html
+  <h2>myFriendspace</h2>
+```
