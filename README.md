@@ -11,11 +11,11 @@ So we will be making an **Angular** application on which my friends from becode 
 
 ### Some must-haves
 Fields we need for our friend list are:
-- [ ] First name
-- [ ] Last name
-- [ ] Email
-- [ ] Phone number
-- [ ] Favourite language (HTML, CSS, JS, PHP,...), this will be a select with options
+- [x] First name
+- [x] Last name
+- [x] Email
+- [x] Phone number
+- [x] Favourite language (HTML, CSS, JS, PHP,...), this will be a select with options
 
 Error reporting:
 - [ ] Give visual feedback to the user if they give wrong input
@@ -51,19 +51,27 @@ Friend list:
   - yadi yadi ya
 
 ## Steps to get started
-1. - [x] Clone the angular repository from ANT-Lamarr-6.35
-2. - [x] Check if you have node.js and npm
-3. - [x] Install the Angular [cli](https://en.wikipedia.org/wiki/Command-line_interface) with (in my case) `brew install angular-cli`
-4. - [x] Copy the server folder into your working directory
-5. - [x] Navigate in your terminal to your working directory and enter `ng new my-friends`. You should now have 2 folders, "server" (your node API), and "my-friends" (my angular map).
-6. - [x] In terminal go inside the "my-friends" folder and run `ng serve --port 4500`. Now we can check out our angular app on `localhost:4500`
-7. - [x] In our IDE we navigate to `my-friends/src/app`. Here we'll find 2 things:
-  - The template, `app.component.html`
-  - The component, `app.component.ts`
-  - The view we see in the page is produced by the **combination** of that ***template*** and the ***component*** that brings the logic to the template.
-  - We should never pay attention to `.spec` files, these are for unit testing which is out of scope for this exercise.
-8. - [x] We empty the "AppComponent" class and the template. The template file should be completely empty. Inside of the AppComponent class we'll write our logic and in the template we'll write our HTML.
-9. - [ ] In the HTML file, add a form with the required inputs (at least). Take a look at the must-haves above. Don't forget a submit button, make it a **regular** button. NOT AN INPUT TYPE BUTTON!
+1) - [x] Clone the angular repository from ANT-Lamarr-6.35
+2) - [x] Check if you have node.js and npm
+3) - [x] Install the Angular [cli](https://en.wikipedia.org/wiki/Command-line_interface) with (in my case) `brew install angular-cli`
+4) - [x] Copy the server folder into your working directory
+5) - [x] Navigate in your terminal to your working directory and enter `ng new my-friends`. You should now have 2 folders, "server" (your node API), and "my-friends" (my angular map).
+6) - [x] In terminal go inside the "my-friends" folder and run `ng serve --port 4500`. Now we can check out our angular app on `localhost:4500`
+7) - [x] In our IDE we navigate to `my-friends/src/app`. Here we'll find 2 things:
+- The template, `app.component.html` 
+- The component, `app.component.ts`
+- The view we see in the page is produced by the **combination** of that ***template*** and the ***component*** that brings the logic to the template.
+- We should never pay attention to `.spec` files, these are for unit testing which is out of scope for this exercise.
+8) - [x] We empty the "AppComponent" class and the template. The template file should be completely empty. Inside of the AppComponent class we'll write our logic and in the template we'll write our HTML.
+9) - [x] In the HTML file, add a form with the required inputs (at least). Take a look at the must-haves above. Don't forget a submit button, make it a **regular** button. NOT AN INPUT TYPE BUTTON!
+10) - [x] Put the names of the languages inside an array in the component class. Use the ngFor loop to generate all the options, which is way more efficient.
+11) - [x] Bind the data to your form
+  - In app.module.ts, import the `FormsModule` form @angular/forms. Also add it to the imports array.
+  - Add `#formName="ngForm` to your form, I called it `#formFriends`. This will make it a variable which contains all the data of the form in realtime.
+  - Also add `#inputName="ngModel` to every input tag. You will have several; #firstName, #lastName,... Make sure all your inputs have a name attribute
+  - Put `ngModel` inside of each input, also your select tag
+  - Test if it works, to do this add `{{ formFriends.value | json }}` at the top of your html file. Once you fill in values, you'll see them update live.
+12) - [ ] 
 
 ## What is Angular?
 Angular is a development platform, built on **TypeScript**.
