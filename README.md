@@ -56,3 +56,31 @@ Friend list:
 3. - [x] Install the Angular [cli](https://en.wikipedia.org/wiki/Command-line_interface) with (in my case) `brew install angular-cli`
 4. - [x] Copy the server folder into your working directory
 5. - [x] Navigate in your terminal to your working directory and enter `ng new my-friends`. You should now have 2 folders, "server" (your node API), and "my-friends" (my angular map).
+6. - [x] In terminal go inside the "my-friends" folder and run `ng serve --port 4500`. Now we can check out our angular app on `localhost:4500`
+7. - [x] In our IDE we navigate to `my-friends/src/app`. Here we'll find 2 things:
+  - The template, `app.component.html`
+  - The component, `app.component.ts`
+  - The view we see in the page is produced by the **combination** of that ***template*** and the ***component*** that brings the logic to the template.
+  - We should never pay attention to `.spec` files, these are for unit testing which is out of scope for this exercise.
+8. - [x] We empty the "AppComponent" class and the template. The template file should be completely empty. Inside of the AppComponent class we'll write our logic and in the template we'll write our HTML.
+9. - [ ] In the HTML file, add a form with the required inputs (at least). Take a look at the must-haves above. Don't forget a submit button, make it a **regular** button. NOT AN INPUT TYPE BUTTON!
+
+## What is Angular?
+Angular is a development platform, built on **TypeScript**.
+Angular includes:
+- A component-based framework for building scalable web apps.
+- A collection of well-integrated libraries that cover a wide variety of features.
+- A suite of developer tools to help you develop, build, test, and update your code.
+
+Angular is a platform that can scale from single-developer projects to enterprise-level applications.
+
+## Angular - Essentials:
+
+### Components:
+Components are our building blocks that compose an application. It includes a TypeScript class with an `@Component()` decorator, an HTML template, and styles.
+The `@Component()` decorator specifies Angular-specific info:
+- A CSS selector (defines how the component is used in a template). HTML elements in your template that match this selector become instances of the component.
+- An HTML template that instructs Angular how to render the component.
+- An optional set of CSS styles that define the appearance of the template's HTML elements.
+
+### Templates
