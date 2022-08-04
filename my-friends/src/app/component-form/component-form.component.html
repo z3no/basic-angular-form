@@ -6,32 +6,40 @@
   <form #formFriends="ngForm">
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName">
+      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName" required>
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+           class="alert alert-danger">
+        <div *ngIf="firstName.errors?.['required']">
+          Name is required.
+        </div>
+
+      </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" [(ngModel)]="friendModel.lastName">
+      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" [(ngModel)]="friendModel.lastName" required>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email">
+      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email" required>
     </div>
 
     <div class="form-group">
       <label for="phoneNumber">Phone number:</label>
-      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" [(ngModel)]="friendModel.phoneNumber">
+      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" [(ngModel)]="friendModel.phoneNumber" required>
     </div>
 
     <div class="form-group">
       <label for="favLanguage">Favourite language:</label>
-      <select name="favourite language" id="favLanguage" class="form-control" #favLanguages="ngModel" [(ngModel)]="friendModel.favLanguages">
+      <select name="favourite language" id="favLanguage" class="form-control" #favLanguages="ngModel" [(ngModel)]="friendModel.favLanguages" required>
+        <option value="" disabled selected>Choose your favourite coding language</option>
         <option *ngFor="let language of Languages">{{language}}</option>
       </select>
     </div>
 
-    <button class="btn btn-form" type="submit">Submit</button>
+    <button class="btn btn-dark" type="submit">Submit</button>
 
   </form>
 
