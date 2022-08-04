@@ -1,30 +1,32 @@
 <!--<p>component-form works!</p>-->
+{{ formName.value | json }}
+
 <div class="container">
 
-  <form>
+  <form #formName="ngForm">
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input type="text" name="first name" id="firstName" class="form-control">
+      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" ngModel>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input type="text" name="last name" id="lastName" class="form-control">
+      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" ngModel>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" name="email" id="email" class="form-control">
+      <input type="text" name="email" id="email" class="form-control" #email="ngModel" ngModel>
     </div>
 
     <div class="form-group">
       <label for="phoneNumber">Phone number:</label>
-      <input type="text" name="phone number" id="phoneNumber" class="form-control">
+      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" ngModel>
     </div>
 
     <div class="form-group">
       <label for="favLanguage">Favourite language:</label>
-      <select name="coding language" id="favLanguage" class="form-control">
+      <select name="favourite language" id="favLanguage" class="form-control" #languages="ngModel" ngModel>
         <option *ngFor="let language of Languages">{{language}}</option>
       </select>
     </div>
