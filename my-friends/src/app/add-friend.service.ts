@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Friend } from "./friend"
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddFriendService {
 
-  private _http: HttpClient;
+  private _url: string = "";
 
-  constructor(http:HttpClient) {
-    this._http = http;
+  constructor(private _http:HttpClient) {}
+
+  public AddFriend(data : Friend) {
+    return this._http.post(this._url, data);
   }
 
 }

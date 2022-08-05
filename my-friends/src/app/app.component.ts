@@ -1,5 +1,3 @@
-// IN THIS FILE WE'LL WRITE OUR LOGIC
-
 import { Component } from '@angular/core';
 
 @Component({

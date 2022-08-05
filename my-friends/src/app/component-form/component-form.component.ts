@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Friend } from "../friend";
+import { AddFriendService } from "../add-friend.service";
 
 @Component({
   selector: 'app-component-form',
@@ -24,7 +25,9 @@ export class ComponentFormComponent implements OnInit {
 
   friendModel = new Friend('', '', '', '', '');
 
-  constructor() { }
+  constructor(private _addFriendService:AddFriendService) {
+
+  }
 
   ngOnInit(): void {
   }
@@ -34,6 +37,19 @@ export class ComponentFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log(this.friendModel);
+    const observable = this._addFriendService.AddFriend(this.friendModel);
+    console.log(observable);
+
+    observable.subscribe({
+      next: (data) => {
+        console.log(data);
+        console.log("Succes!");
+      },
+      error: (error) => {
+        console.log(error);
+        console.log('Failed');
+      }
+    });
   }
 
 }
