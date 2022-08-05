@@ -71,7 +71,36 @@ Friend list:
   - Also add `#inputName="ngModel` to every input tag. You will have several; #firstName, #lastName,... Make sure all your inputs have a name attribute
   - Put `ngModel` inside of each input, also your select tag
   - Test if it works, to do this add `{{ formFriends.value | json }}` at the top of your html file. Once you fill in values, you'll see them update live.
-12) - [ ] 
+12) - [x] The ngModel that's added to the inputs is not complete yet. It's supposed to be used to bind the data to a model.
+  - Add a new "friend" model to our project, in the root of our app run `ng generate class Friend` in your terminal.
+  - Open the generated friend.ts file, add a constructor to the class. Add the corresponding properties. Don't forget about typehinting!
+  - In your component form class, instantiate the friendModel through the friend class with all properties set to null. To do this you'll also need to import the friend class.
+  - In your HTML change the ngModel of your inputs to `[(ngModel)]="friendModel.firstName"` and so on.
+  - Test if it works! Go to the top of your HTML and change `{{ formFriends.value | json }}` to `{{ friendModel | json }}`. Nothing seems to really change, now your data is bound to the friend model.
+13) - [x] Display when a field is invalid to the user:
+I did this one a little differently, I was looking at the documents of angular itself and did it in the way they do it for template-driven forms.
+You can add the same validation attributes as you would with native HTML form validation. Angular uses directives to match these attributes with validator functions in the framework.
+Every time the value of a form control changes, Angular runs validation and generates either a list of validation errors that results in an `INVALID` status, or null, which results in a `VALID` status.
+
+You can inspect the control's stat by exporting `ngModel` to a local template variable. Let's look at the first name example:
+```angular2html
+    <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName" required>
+    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+      <div *ngIf="firstName.errors?.['required']">
+        Your given name is required.
+      </div>
+    </div>
+```
+- The `<input>` element carries the HTML validation attribute `required`.
+- `#firstName="ngModel"` exports `ngModel` into a local variable called `firstName`. `ngModel` mirrors many of the properties of its underlying `FormControl` instance, so you can just use this in the template to check for control states such as `valid` (a control is valid when its status is VALID) and `dirty` (a control is dirty if the user has changed the value in the UI). You can find the full list of control properties at the [AbstractControl](https://angular.io/api/forms/AbstractControl) API reference.
+  - The *[ngIf](https://angular.io/api/common/NgIf) on the `<div>` element reveals a nested message `<div>` but only if the `firstName` is invalid and the control is either `dirty` or `touched`.
+  - Each nested `<div>` can present a custom message for one of the possible validation errors.
+- Add the pattern property to the input field and as a value add the regular expression that it would have to suffice.
+- Regex is hard and you don't have to do it perfectly, however it is manageable to:
+  - [x] Have no numbers in names
+  - [x] Have no letters in phone numbers
+  - [x] Have no special code characters allowed anywhere if they're not needed.
+14) - [ ]
 
 ## What is Angular?
 Angular is a development platform, built on **TypeScript**.
