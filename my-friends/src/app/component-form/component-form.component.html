@@ -3,7 +3,7 @@
 
 <div class="container">
 
-  <form #formFriends="ngForm">
+  <form #formFriends="ngForm" novalidate (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName">First Name:</label>
       <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName" required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$">
@@ -32,12 +32,12 @@
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email" required [email]="true">
       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
         <div *ngIf="email.errors?.['required']">
           Your email is required.
         </div>
-        <div *ngIf="email.errors?.['pattern']">
+        <div *ngIf="email.errors?.['email']">
           Your email is invalid.
         </div>
       </div>

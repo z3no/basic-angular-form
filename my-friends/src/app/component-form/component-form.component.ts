@@ -29,4 +29,11 @@ export class ComponentFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  submitted = false;
+
+  onSubmit() {
+    this.submitted = true;
+    console.log(this.friendModel);
+  }
+
 }
