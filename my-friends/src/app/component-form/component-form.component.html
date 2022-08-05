@@ -6,30 +6,39 @@
   <form #formFriends="ngForm">
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName" required>
+      <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName" required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$">
       <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
         <div *ngIf="firstName.errors?.['required']">
           Your given name is required.
+        </div>
+        <div *ngIf="firstName.errors?.['pattern']">
+          Your given name can only contain characters.
         </div>
       </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" [(ngModel)]="friendModel.lastName" required>
+      <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" [(ngModel)]="friendModel.lastName" required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$">
       <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
         <div *ngIf="lastName.errors?.['required']">
           Your surname is required.
+        </div>
+        <div *ngIf="lastName.errors?.['pattern']">
+          Your surname can only contain characters.
         </div>
       </div>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email" required>
+      <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
         <div *ngIf="email.errors?.['required']">
           Your email is required.
+        </div>
+        <div *ngIf="email.errors?.['pattern']">
+          Your email is invalid.
         </div>
       </div>
     </div>
