@@ -7,28 +7,44 @@
     <div class="form-group">
       <label for="firstName">First Name:</label>
       <input type="text" name="first name" id="firstName" class="form-control" #firstName="ngModel" [(ngModel)]="friendModel.firstName" required>
-      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
-           class="alert alert-danger">
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
         <div *ngIf="firstName.errors?.['required']">
-          Name is required.
+          Your given name is required.
         </div>
-
       </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
       <input type="text" name="last name" id="lastName" class="form-control" #lastName="ngModel" [(ngModel)]="friendModel.lastName" required>
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+        <div *ngIf="lastName.errors?.['required']">
+          Your surname is required.
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="text" name="email" id="email" class="form-control" #email="ngModel" [(ngModel)]="friendModel.email" required>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required']">
+          Your email is required.
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="phoneNumber">Phone number:</label>
-      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" [(ngModel)]="friendModel.phoneNumber" required>
+      <input type="text" name="phone number" id="phoneNumber" class="form-control" #phoneNumber="ngModel" [(ngModel)]="friendModel.phoneNumber" required pattern="^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$">
+      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
+        <div *ngIf="phoneNumber.errors?.['required']">
+          Your phone number is required.
+        </div>
+        <div *ngIf="phoneNumber.errors?.['pattern']">
+          Your phone number can not contain letters.
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -37,6 +53,11 @@
         <option value="" disabled selected>Choose your favourite coding language</option>
         <option *ngFor="let language of Languages">{{language}}</option>
       </select>
+      <div *ngIf="favLanguages.invalid && (favLanguages.dirty || favLanguages.touched)" class="alert alert-danger">
+        <div *ngIf="favLanguages.errors?.['required']">
+          Please choose a coding language.
+        </div>
+      </div>
     </div>
 
     <button class="btn btn-dark" type="submit">Submit</button>
