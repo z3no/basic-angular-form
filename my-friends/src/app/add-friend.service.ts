@@ -12,7 +12,14 @@ export class AddFriendService {
   constructor(private _http:HttpClient) {}
 
   public AddFriend(data : Friend) {
-    return this._http.post(this._url+'allFriends', data);
+    return this._http.post(this._url + 'allFriends', data);
   }
 
+  get url(): string {
+    return this._url;
+  }
+
+  get http(): HttpClient {
+    return this._http;
+  }
 }
