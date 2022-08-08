@@ -3,7 +3,7 @@ export class Friend {
   private _lastName:string;
   private _email:string;
   private _phoneNumber:string;
-  private _favLanguages:string;
+  private _favLanguage:string;
 
   constructor(firstName:string,
               lastName:string,
@@ -15,7 +15,7 @@ export class Friend {
     this._lastName = lastName;
     this._email = email;
     this._phoneNumber = phoneNumber;
-    this._favLanguages = favLanguage;
+    this._favLanguage = favLanguage;
   }
 
 
@@ -52,11 +52,11 @@ export class Friend {
   }
 
   get favLanguages(): string {
-    return this._favLanguages;
+    return this._favLanguage;
   }
 
   set favLanguages(value: string) {
-    this._favLanguages = value;
+    this._favLanguage = value;
   }
 
 }
