@@ -25,9 +25,9 @@ export class ComponentFormComponent implements OnInit {
 
   friendModel = new Friend('', '', '', '', '');
   friendsUrl : string = 'http://localhost:9099/allFriends';
+  private _allFriends:any;
 
   constructor(private _addFriendService:AddFriendService) {
-
   }
 
   ngOnInit(): void {
@@ -57,7 +57,11 @@ export class ComponentFormComponent implements OnInit {
 
   public async getFriendsRequest(url:string) : Promise<any> {
     const response = await fetch(url, {method: 'GET', headers: {'Content-Type': 'application.json'}});
-    return await response.json();
+    this._allFriends = await response.json();
+  }
+
+  get allFriends(){
+    return this._allFriends;
   }
 
 }
