@@ -7,12 +7,12 @@ import { Friend } from "./friend"
 })
 export class AddFriendService {
 
-  private _url: string = "";
+  private _url: string = "http://localhost:9099/";
 
   constructor(private _http:HttpClient) {}
 
   public AddFriend(data : Friend) {
-    return this._http.post(this._url, data);
+    return this._http.post(this._url+'allFriends, data);
   }
 
 }
