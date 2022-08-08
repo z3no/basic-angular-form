@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Friend } from "../friend";
-import { AddFriendService } from "../add-friend.service";
+import {Component, OnInit} from '@angular/core';
+import {Friend} from "../friend";
+import {AddFriendService} from "../add-friend.service";
 
 @Component({
   selector: 'app-component-form',
@@ -24,12 +24,14 @@ export class ComponentFormComponent implements OnInit {
   ];
 
   friendModel = new Friend('', '', '', '', '');
+  friendsUrl : string = 'http://localhost:9099/allFriends';
 
   constructor(private _addFriendService:AddFriendService) {
 
   }
 
   ngOnInit(): void {
+    this.getFriendsRequest(this.friendsUrl);
   }
 
   submitted = false;
@@ -38,18 +40,24 @@ export class ComponentFormComponent implements OnInit {
     this.submitted = true;
     console.log(this.friendModel);
     const observable = this._addFriendService.AddFriend(this.friendModel);
-    console.log(observable);
+    //console.log(observable);
 
     observable.subscribe({
       next: (data) => {
         console.log(data);
         console.log("Succes!");
+        this.getFriendsRequest(this.friendsUrl);
       },
       error: (error) => {
         console.log(error);
         console.log('Failed');
       }
     });
+  }
+
+  public async getFriendsRequest(url:string) : Promise<any> {
+    const response = await fetch(url, {method: 'GET', headers: {'Content-Type': 'application.json'}});
+    return await response.json();
   }
 
 }
