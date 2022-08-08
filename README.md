@@ -18,17 +18,17 @@ Fields we need for our friend list are:
 - [x] Favourite language (HTML, CSS, JS, PHP,...), this will be a select with options
 
 Error reporting:
-- [ ] Give visual feedback to the user if they give wrong input
+- [x] Give visual feedback to the user if they give wrong input
 
-- [ ] Form validation
+- [x] Form validation
 
 Friend list:
 - [ ] send a GET request to your local node server, get your friends
 - [ ] POST request, be able to add a friend to your list
 
 ### Nice-to-haves
-- [ ] Email and phone number are ***actually*** emails and phone numbers.
-- [ ] Make it easy for a user to add a phone number, following phone numbers could all be valid:
+- [x] Email and phone number are ***actually*** emails and phone numbers.
+- [x] Make it easy for a user to add a phone number, following phone numbers could all be valid:
   - 0488888888
   - +324888 88888
   - 04 88 88 88 88
@@ -100,7 +100,51 @@ You can inspect the control's stat by exporting `ngModel` to a local template va
   - [x] Have no numbers in names
   - [x] Have no letters in phone numbers
   - [x] Have no special code characters allowed anywhere if they're not needed.
-14) - [ ]
+14) - [x] If all fields are valid, the forms valid property will also be set to valid. The button is disabled when the form is not valid.
+- I added the following code to my button `[disabled]="!formFriends.valid`, when I went to the page I couldn't click the button unless the input fields had been filled in correctly.
+15) - [x] Let's submit the data to a server, but before we can do that we need to be able to do something on submit and get access to http requests.
+- Add ngSubmit property to your form, now we can bind a function to it and use that function in our component class to trigger it on submit.
+```angular2html
+    <form #formFriends="ngForm" novalidate (ngSubmit)="onSubmit()">
+        ...
+    </form>
+```
+- In our component form class, we define the function and we console log our friend model. When we now submit the form we'll see the data appear in our console.
+- To add this friend to our friendlist server, we'll need to make a service for it. To make a service we'll use the cli and input the command `ng g s addFriend`. This means, a`ng`ular `g`enerate `s`ervice with name `addFriendService`, when we generate a service we'll see that after the name we have given, it will automatically add `Service` after it.
+- In addFriend.service.ts we import `HttpClient`. In our addFriend class, we add a new private property called `http` to the constructor. We typehint it to be of type HttpClient.
+- We'll also have to import the `HttpClientModule` in our app.module.ts and to the imports array below.
+16) - [x] Now we have our data on submit, and we're in a position to start http requests. We want to post our data to a server.
+- In our service, we make a method called addFriend and give it a parameter, typehint it to be of the Friend type. We'll also need to import Friend.
+- In this method we'll write a post request. It looks like this: `this.http.post(url, data)`. Return it afterwards, what we'll get back is something called an observable. http is the property HttpClient, is the type of data our post can contain and url is the url we're sending the data to.
+- We'll get back to the url later. For now, make a property called 'url' and leave it as an empty string.
+- In our app.component.ts also import our service and make a constructor in the component class. Add a private "addFriendService" property and typehint it.
+- Now we can use the service in the method that triggers when the form gets submitted. In the method, we call the addFriend method of the addFriendService and pass the friend data to it.
+- The method we made returns something called an "observable". If you want, you can also work with promises, however in this case we used an observable and to get the data out of it, we need to subscribe to it.
+17) - [x] Everything is set up in order to send data to our local api.
+- First, in the server.js file in the server folder, change the port to whatever number you like that is not occupied. Port numbers 9000 - 9099 are always safe, just make sure no other application is running on those ports.
+- In the server folder in your terminal, run the command node server. You won't get any confirmation that the server is running, just a blank new line. Now navigate to `localhost:9099`.
+- You should see "Hello from server". That is because the get function in the server file with the root "/" as it's path sent it as a response.
+- You'll find an array allFriends, this is where you'll push your new friend to. But first, let's take a look at your friends in the server.
+- Add a new get function with path "allFriends" and send the allFriends variable as a response. **If you make changes to your server, make sure it's not running and then run it again with the `node server` command.** If you now navigate to `localhost:9099/allFriends` you'll get to see all your friends.
+- Remember the url that we left empty? It's time to configure a path to which we'll post our data. Start by changing the url to `'http://localhost:9099'`.
+- Next, make a new post function with path "addFriend". In here, push the request body to the allFriends array.
+- If you now go to your form and add a friend, submit the form, you'll see in your server, localhost:PORT/allFriends, that the friend has been added to the list.
+18) - [x] You've sent data, but now we also want to display the newly updated friend list on your page. To do this, we'll have to make a get request to the server.
+- We want to do this get request in 2 different cases, one is when the page loads and the other is when we post data to the server.
+- First, let's write the function itself and later call the function when we need it. Make a new public async function in the component and pass the url as a parameter. Typehint the parameter and the function. The function will return a Promise of type any. A typehint of a promise with type looks like this: `Promise`.
+- Then, add a fetch to the function and return and await it. The method should be get and the headers should be `'Conent-Type': 'application/json'`.
+- Add a property to your component class called allFriends and in the fetch where you can access the fetched data, assign the value of the data to that property.
+- We now have our fetch working, let's call it when we submit the form first. To do this in the success part of the subscribe, call the function with url `'http://localhost:9099/allFriends'`.
+- To do it on page load, import OnInit. Next your AppComponent class has to implement it.
+- To make something happen on pageload, in the class add `ngOnInit():any { this.getFriendsRequest(this.friendsUrl); }`. In here, call your fetch function like we did previously for the form submit.
+- We now have our friend list updated in the property allFriends of the component class.
+- To check if you have your friends data console log it.
+19) - [x] Now we can display the friends in the template using the property allFriends.
+- To do this we'll use the ngFor loop, add the following code to a div: `*ngFor="let friend of allFriends"`.
+- In this div, if you enter `{{friend._email}}` for example. You'll see that on your page all the emails of your friends are being displayed.
+- Now display all details of your friends, try adding new friends in the process. It updates instantly!
+20) - [x] You now have all the must-have features. Congratulations! If you have time left, be sure to take a look at the nice-to-have features.
+21) - [x] Congratulations, you survived the first steps of Angular and Node. I'm proud of you!
 
 ## What is Angular?
 Angular is a development platform, built on **TypeScript**.
@@ -154,3 +198,4 @@ When the app loads the component and its template, the user sees the following:
 ```html
   <h2>myFriendspace</h2>
 ```
+
